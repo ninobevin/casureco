@@ -67,14 +67,7 @@
     </div>
 </div>
 
-
-
-
  --}}
-
-
-
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -144,7 +137,6 @@
         Google+</a>
     </div> --}}
     <!-- /.social-auth-links -->
-
     <a href="#">I forgot my password</a><br>
     <a href="{{ route('register') }}" class="text-center">Register a new membership</a>
 

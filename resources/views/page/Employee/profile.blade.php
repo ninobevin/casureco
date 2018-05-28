@@ -13,13 +13,44 @@
 @section('content')
 
 
+<?php
+  
+
+  $canvas_source = URL("user/".$Employee->cfcodeno."/avatar");
+  
+?>
+
+
+
 <div class="row">
         <div class="col-md-3">
 
           <!-- Profile Image -->
           <div class="box box-primary">
             <div class="box-body box-profile">
-              <img class="profile-user-img img-responsive" src='{{ URL("user/".$Employee->cfcodeno."/avatar") }}' alt="User profile picture">
+              <img id="prof_pic"  class="profile-user-img img-responsive" src='{{ URL("user/".$Employee->cfcodeno."/avatar") }}' alt="User profile picture">
+              </img>
+
+           
+                <div style="text-align: center;">
+                 {{--  <a id="btn_upload"><i class="fa fa-upload"></i></a>  --}}
+
+                {{--  <a id="btn_upload"><i class="fa fa-upload"></i></a>
+ --}}
+
+                 <label class="btn-file">
+                     <a ><i class="fa fa-upload"></i></a> <input type="file" id="btn_upload" style="display: none;">
+                 </label>
+
+                  <a id="btn_edit" data-toggle="modal" data-target="#imageCrop"><i class="fa fa-crop"></i></a>  
+                </div>
+
+                <div id="wait-text2" style="visibility: hidden; text-align: center;">
+                       <img  src="{{ asset('dist/img/loading3.gif') }}"></img>  <span>Updating profile..Please wait...</span>
+                </div>
+                 
+           
+
 
               <h3 class="profile-username text-center">{{ $Employee->cffname }} {{ $Employee->cfmname }} {{ $Employee->cflname }}</h3>
 
@@ -68,7 +99,12 @@
                    Certificates <span class="caret"></span>
                  </a>
                  <ul class="dropdown-menu">
-                   <li role="presentation"><a role="menuitem" tabindex="-1" href='{{ route("employee.coe_form",["id"=>$Employee->cfcodeno]) }}'>Certificate of Employment</a></li>
+                   <li role="presentation">
+                      <a role="menuitem" tabindex="-1" href='{{ route("employee.coe_wc_form",["id"=>$Employee->cfcodeno]) }}'>Certificate of Employment w/ Compensation</a>
+                   </li>
+                   <li role="presentation">
+                      <a role="menuitem" tabindex="-1" href='{{ route("employee.coe_form",["id"=>$Employee->cfcodeno]) }}'>Certificate of Employment</a>
+                   </li>
                  </ul>
                </li>
             </ul>
@@ -145,6 +181,73 @@
         </div>
         <!-- /.col -->
 </div>
+@include('modal.imageCrop')
+@endsection
+
+@section('scripts')
+
+
+
+<script>
+
+  
+function readURL(input) {
+
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+
+    reader.onload = function(e) {
+      $('#prof_pic').attr('src', e.target.result);
+
+      //img_src = e.target.result;
+      //$('#img_test').attr('src', e.target.result);
+
+      //console.log($('#img_test').src);
+
+        var srcpic = document.getElementById("prof_pic").src;
+
+       imageCropper.image.src =  srcpic
+
+       document.getElementById("imgpic").value = srcpic.split(",")[1];
+
+       $("#wait-text2").css("visibility","visible");
+
+       $("#form_pic").submit();
+
+
+       $("#form_pic").submit();
+       
+   
+   
+    }
+
+    reader.readAsDataURL(input.files[0]);
+  }
+}
+
+$("#btn_upload").change(function() {
+
+  
+  readURL(this);
+
+
+
+  imageCropper.init();
+
+  
+   
+
+
+
+
+});
+
+
+
+
+</script>
+
+  
 
 @endsection
 

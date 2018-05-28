@@ -4,10 +4,12 @@ namespace App\Model\coopca_hrd;
 
 use Illuminate\Database\Eloquent\Model;
 
-class EmployeeSchool extends Model
+class Allowance extends Model
 {
     //
+
     protected $connection = 'coopca_hrd';
-    protected $primaryKey = 'idschool1';
-    protected $table = 'school1';
+    protected $primaryKey = 'id';
+    protected $table = 'allowances';
+    public $timestamps = false;
 }

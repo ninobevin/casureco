@@ -9,7 +9,7 @@ class Department extends Model
     //
 
  
- 	protected $connection = 'mysql';
+ 	protected $connection = 'coopca_hrd';
     protected $primaryKey = 'idgroup2';
     protected $table = 'group2';
 }

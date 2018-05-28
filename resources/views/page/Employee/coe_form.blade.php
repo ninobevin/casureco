@@ -7,97 +7,67 @@
 @endsection
 
 @section('content-title')
-  Employee Profile
+  
 @endsection
 
 <?php
   
+
+
   use \Carbon\Carbon;
 
 
 
   $jobfirst = $Employee->getJobHistory->first();
   $jobLast = $Employee->getJobHistory->last();
+
 ?>
 
 @section('content')
-
-
-
     <div class="row no-print">
+      <div class="col-sm-12">
+        <div class="box box-info">
+          <div class="box-header with-border">
+            <h3 class="box-title">Certification Details</h3>
+            <div class="box-tools pull-right">
+              <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+              </button>
+              <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+            </div>
+          </div>
+          <!-- /.box-header -->
+          <div class="box-body">
+          
+              <div class="col-sm-12">
+              <form class="form">
+                  <div class="form-group">
+                    <label for="inputName" class="control-label">Purpose:</label>
 
+                    
+                      <textarea style="resize: none;" class="form-control" id="purpose" placeholder=""></textarea>
+                   
+                  </div>
+                  
+                 
+              </form>
+              </div>
+            <!-- /.table-responsive -->
 
-        <div class="col-md-12 ">
-
-        <div class="panel col-md-6">
-
-          Choose any item to be included below.
-           <div class="form-group">
-                         
-                            <input type="checkbox" class="flat-red" onclick='insertValue(this,"Rice Allowance","2500.00","30000.00")'>
-                            Rice Allowance
-                          
-                          <br>
-                            <input type="checkbox" class="flat-red" onclick='insertValue(this,"Meal Allowance","800.00","9600.00")'>
-                            Meal Allowance
-                       
-                          <br>
-                            <input type="checkbox" class="flat-red" onclick='insertValue(this,"Representation Allowance","3900.00","46800.00")'>
-                            Representation Allowance
-                          <br>
-                              <input type="checkbox" class="flat-red" onclick='insertValue(this,"Fixed Overtime","1500.00","18000.00")'>
-                            Fixed Overtime
-                      
-                         <br>
-                            <input type="checkbox" class="flat-red" onclick='insertValue(this,"Load Allowance","800.00","9600.00")'>
-                            Load Allowance
-                         <br>
-                       
-                            <input type="checkbox" class="flat-red" onclick='insertValue(this,"Medical Allowance","","8000.00")'>
-                            Medical Allowance
-                         <br>
-                         
-                            <input type="checkbox" class="flat-red" onclick='insertValue(this,"Clothing Allowance","","6000.00")'>
-                            Clothing Allowance
-                         <br>
-                         
-                            <input type="checkbox" class="flat-red" onclick='insertValue(this,"Anniversary Bonus","","5000.00")'>
-                            Anniversary Allowance
-                          <br>
-                             <input type="checkbox" class="flat-red" onclick='insertValue(this,"Cash Gift","","5000.00")'>
-                             Cash Gift
-                         <br>
-                            <input type="checkbox" class="flat-red" onclick='insertValue(this,"Financial Assistance","","25000.00")'>
-                            Financial Assistance
-
-                          <br>
-                             <input type="checkbox" class="flat-red" onclick='insertValue(this,"Mobility Allowance","600.00","7200.00")'>
-                             Mobility Allowance
             
-                         
-                          
-            </div>
+          </div>
+          <!-- /.box-body -->
+          <div class="box-footer clearfix">
+            {{-- <a href="javascript:void(0)" class="btn btn-sm btn-info btn-flat pull-left">Place New Order</a> --}}
+            <a href="javascript:void(0)" id="update_info"  class="btn btn-sm btn-default btn-flat pull-right">Update Info</a>
+          </div>
+          <!-- /.box-footer -->
         </div>
-      
+        <!-- /.box -->
+        
+      </div>
     </div>
-    </div>
-
-    <section class="invoice">
-          <!-- title row -->
-         {{--  <div class="row">
-            <div class="col-xs-12">
-              <h2 class="page-header">
-                <i class="fa fa-globe"></i> AdminLTE, Inc.
-                <small class="pull-right">Date: 2/10/2014</small>
-              </h2>
-            </div>
-            <!-- /.col -->
-          </div> --}}
-          <!-- info row -->
-     
-          <!-- /.row -->
-
-          <!-- Table row -->
+  
+    <section class="invoice" style="padding-left: 50px;padding-right: 50px;">
 
           <style type="text/css">
               tr,th,td {
@@ -109,10 +79,12 @@
               table{
                 width: 100%;
               }
+
+
           </style>
 
 
-          <div class="col-xs-12" style="height:150px;"></div>
+          <div class="col-xs-12" style="height:140px;"></div>
           <div class="row">
             <div style="text-align: center;">
                 
@@ -120,120 +92,50 @@
               <img src='{{ URL("user/".$Employee->cfcodeno."/avatar") }}' class="img" alt="User Image" style="width: 150px;">
             </div>
           </div>
-
-          <div class="row">
+          <br>
+          <p>
             To whom it may concern:
-          </div>
+          </p>
           <br>
-          <div class="row" >
-            <p style="text-indent: 50px;">This is to certify that based on record,<b> {{ $Employee->cfsex == "MALE"?"Mr.":"Ms." }} {{ $Employee->cffname }} {{ $Employee->cfmname }} {{ $Employee->cflname }}</b>, whose picture appears herein, is an employee of the Camarines Sur 1 Electric Cooperative, Inc. (CASURECO 1) from <b>{{ Carbon::parse($Employee->dfhired)->format('F d, Y') }}</b> and has held the position of <b>{{ $jobLast['cftitle'] }}</b> from 
+       
+            <p style="text-indent: 3em;"  contenteditable="true" align="justify">This is to certify that based on record,<b>
+            <?php
+              
+              if( strtoupper($Employee->cfsex[0]) == "M") 
+              {
+                echo "Mr.";
+              }elseif (strtoupper($Employee->cfsex[0]) == "F") {
+                # code...
+                echo "Ms.";
+              }else{
+                # code...
+                echo "";
+              } 
+
+
+            ?> {{ $Employee->cffname }} {{ $Employee->cfmname }} {{ $Employee->cflname }}</b>, whose picture appears herein, is an employee of the Camarines Sur 1 Electric Cooperative, Inc. (CASURECO 1) from <b>{{ Carbon::parse($Employee->dfhired)->format('F d, Y') }}</b> and has held the position of <b>{{ strtoupper(strtolower($jobLast['cftitle'])) }}</b> from 
             <b>{{ Carbon::parse($jobLast['dfdate1'])->format('F d, Y') }}</b> up to <b>
-            {{ $Employee->cfstatus[0] !=  "A" || $Employee->dfout != "0000-00-00"  ?  Carbon::parse($Employee->dfout)->format('F d, Y') : "present"}} </b>  with the following compensation, to wit:</p>
-          </div>
-          <!-- /.row  header -->
-        {{--   <div class="row">
-
-              <table class="table">
-                <caption>table title and/or explanatory text</caption>
-                <thead>
-                  <tr>
-                    <th></th>
-                 
-                    <th>Monthly</th>
-                  
-                    <th>Annually</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  
-                </tbody>
-              </table>
-           
-          </div> --}}
+            {{ $Employee->cfstatus[0] !=  "A" || $Employee->dfout != "0000-00-00"  ?  Carbon::parse($Employee->dfout)->format('F d, Y') : "present"}} </b> at the <b>{{ $Employee->getDepartment['cfdescript'] }}</b>.</p>
 
 
-          <div class="row" style="padding-left: 50px;padding-right: 50px;">
+          <p contenteditable="true" style="text-indent: 3em;" align="justify">This is being issued upon request of the interested party for <span id="purpose_area"> purpose here </span>.
+          </p>
 
-            <div id="table" class="table-editable">
-                <a class="table-add no-print" style="cursor:pointer;"><i class="fa fa-plus"></i> Add Row</a>
-                <table class="">
-                  <tr>
-                    <th></th>
-                    <th style="text-align:center;">Monthly</th>
-                    <th style="text-align:center;">Annually</th>
-                    <th colspan='2'>
-                  </tr>
-                  <tr>
-                   <input type="hidden" id="basic_salary" value="{{ $Employee->nfratemo }}">
-                    <td>Basic Salary</td>
-                  
-                    <td style="text-align:right;" id="total_month">{{ number_format($Employee->nfratemo,2,'.',',') }}</td>
-                  
-                    <td style="text-align:right;" id="total_year">{{ number_format(($Employee->nfratemo * 12),2,'.',',') }}</td>
-                    <td style="text-align:right;">
-                      <span class="table-remove glyphicon glyphicon-remove no-print"></span>
-                    </td>
-                    <td class="no-print text-right">
-                      <span class="table-up glyphicon glyphicon-arrow-up"></span>
-                      <span class="table-down glyphicon glyphicon-arrow-down"></span>
-                    </td>
-                  </tr>
-                  <tr>
-               
-                    <td>13<sup>th</sup> Month Pay</td>
-                  
-                    <td style="text-align:right;" id="total_month"></td>
-                  
-                    <td style="text-align:right;" id="total_year">{{ number_format($Employee->nfratemo,2,'.',',') }}</td>
-                    <td style="text-align:right;">
-                      <span class="table-remove glyphicon glyphicon-remove no-print"></span>
-                    </td>
-                    <td class="no-print text-right">
-                      <span class="table-up glyphicon glyphicon-arrow-up"></span>
-                      <span class="table-down glyphicon glyphicon-arrow-down"></span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>14<sup>th</sup> Month Pay</td>
-                
-                    <td style="text-align:right;" id="total_month"></td>
-                  
-                    <td style="text-align:right;" id="total_year">{{ number_format($Employee->nfratemo,2,'.',',') }}</td>
-                    <td style="text-align:right;">
-                      <span class="table-remove glyphicon glyphicon-remove no-print"></span>
-                    </td>
-                    <td class="no-print text-right">
-                      <span class="table-up glyphicon glyphicon-arrow-up"></span>
-                      <span class="table-down glyphicon glyphicon-arrow-down"></span>
-                    </td>
-                  </tr>                
-                  <tr class="hide">
-                    <td contenteditable="true" id="description">Item here</td>
-                    <td contenteditable="true" style="text-align:right;" id="total_month">0.00</td>
-                    <td contenteditable="true" style="text-align:right;" id="total_year">0.00</td>
-                    <td style="text-align:right;">
-                      <span class="table-remove glyphicon glyphicon-remove no-print"></span>
-                    </td>
-                    <td class="no-print text-right">
-                      <span class="table-up glyphicon glyphicon-arrow-up"></span>
-                      <span class="table-down glyphicon glyphicon-arrow-down"></span>
-                    </td>
-                  </tr>
-                </table>
-            </div>
-          </div>
-          <br>
-          <div class="row" >
-            <p>This is being issued for <span  contenteditable="true">[DOUBLE CLICK HERE TO EDIT]</span> this {{ Carbon::now()->format(' jS \d\a\y \of F Y') }} at CASURECO I Main Office, Puro-Batia, Libmanan, Camarines Sur, Philippines.</p>
-          </div>
-           <div class="col-xs-12" style="height:40px;"></div>
+          <p contenteditable="true" style="text-indent: 3em;" align="justify">Given this {{ Carbon::now()->format('jS \of F Y') }} at CASURECO I Main Office, Puro-Batia, Libmanan, Camarines Sur.
+          </p>
+       
+
+          <div class="col-xs-12" style="height:40px;"></div>
+
+          <p style="margin-left:45px;" class="text-muted pull-left">Not valid without <br> CASURECO 1 dry seal</p>
           <div class="row">
-             <span class="text-muted pull-left">Not valid without CASURECO 1 dry seal</span>
-            <div class="pull-right" style=" width:200px; text-align:center;">
+             
+            <div class="pull-right" style=" width:150px; text-align:center; margin-right:60px;">
 
               <B>ANA SYLVIA M. ALSISTO</B>
-              <br>
+                <div text>
                   General Manager
+                </div>
             </div>
           </div>
     
@@ -247,9 +149,20 @@
           </div>
           <div class="row no-print">
             <div class="col-xs-12">
-              <a href="invoice-print.html" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Print</a>
-              <button id="export-btn" type="button" class="btn btn-success pull-right"><i class="fa fa-credit-card"></i> Display Total
-              </button>
+              <form id="frm_print">
+
+                  <input type="hidden" name="id" value="{{ $Employee->cfcodeno }}">
+                  <input type="hidden" name="frm_print" value="1">
+         
+
+                  <button type="button" onclick="window.print();" class="btn btn-default"><i class="fa fa-print"></i> Print</button>
+                  {{-- <button id="export-btn" type="button" class="btn btn-success pull-right">
+                      <i class="fa fa-credit-card"></i> Display Total
+                  </button>
+ --}}
+                   {{ csrf_field() }}
+              </form>
+            
             </div>
           </div>
         </section>
@@ -258,6 +171,35 @@
 
 @section('scripts')
 <script>
+  $("#update_info").click(function(){
+
+    $("#purpose_area").text($("#purpose").val());
+
+  });
+
+
+
+window.onafterprint = function(){
+
+
+   console.log("Printing completed...");
+    
+          var str_purpose = $("#purpose").val();
+
+          $.get( "<?php  echo route('employee.addtoprintlogCoe');  ?>",{"id":"<?php  echo $Employee->cfcodeno;  ?>","str_purpose":str_purpose},function(data) {
+                
+
+            console.log(data);
+
+        });
+  //  alert("hey");
+
+  
+         console.log("Printing after");
+
+
+}
+
 function number_format (number, decimals, dec_point, thousands_sep) {
     // Strip all characters but numerical ones.
     number = (number + '').replace(/[^0-9+\-Ee.]/g, '');
@@ -314,6 +256,13 @@ jQuery.fn.shift = [].shift;
 
 
 $BTN.click(function () {
+
+
+    if(!$("#total_income_row").text() == ''){
+      alert("Please remove the total row before computing again...");
+      return;
+    }
+
   var total_year = 0.00;
   var total_month = 0.00;
 
@@ -351,7 +300,7 @@ $BTN.click(function () {
 
   // var k = '<tr>   <td contenteditable="true"><b>Total Income</b></td> <td contenteditable="true" style="text-align:right;" id="tots">'+ total_month.toFixed(2) +'</td> <td contenteditable="true" style="text-align:right;">'+ total_year +'</td>            <td style="text-align:right;">    <span class="table-remove glyphicon glyphicon-remove no-print"></span>      </td>                    <td class="no-print text-right">                      <span class="table-up glyphicon glyphicon-arrow-up"></span>  <span class="table-down glyphicon glyphicon-arrow-down"></span>         </td>    </tr>';
 
-  $('#description', $clone).html("<b>Total Income</b>");
+  $('#description', $clone).html("<b id='total_income_row'>Total Income</b>");
   $('#total_month', $clone).html("<b>"+ number_format(total_month,'2','.',',') +"</b>");
   $('#total_year', $clone).html("<b>"+ number_format(total_year,'2','.',',') +"</b>");
 
@@ -362,7 +311,7 @@ $BTN.click(function () {
 
 function insertValue(e,description,month_val,year_val){
 
-   
+
 
     if(e.checked){
 

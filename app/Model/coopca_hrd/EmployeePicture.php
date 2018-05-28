@@ -9,5 +9,5 @@ class EmployeePicture extends Model
     //
     protected $connection = 'coopca_hrd';
     protected $primaryKey = 'cfcodeno';
-    protected $table = 'view_employee_picture';
+    protected $table = 'employee1';
 }

@@ -13,7 +13,7 @@ use \Illuminate\Support\Facades\Cookie;
       ?>
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="{{ asset('dist/img/user.jpeg') }}" class="img-circle" alt="User Image">
+          <img src='{{ URL("user/".@Auth::user()->employee_no."/avatar") }}' class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
           <p>{{ ucfirst(Auth::user()->name) }}</p>
@@ -35,6 +35,17 @@ use \Illuminate\Support\Facades\Cookie;
               </a>
               <ul class="treeview-menu">
                 <li><a href='{{ route("employee.index") }}'>Find</a></li>
+                <li class="treeview">
+                  <a href="#">
+                   <span>Reports</span>
+                    <span class="pull-right-container">
+                      <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                  </a>
+                  <ul class="treeview-menu">
+                    <li><a href='{{ route("employee.reports") }}'>Certificates Issued</a></li>
+                  </ul>
+                </li>
               </ul>
             </li>
             <li class="treeview">

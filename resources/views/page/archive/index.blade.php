@@ -55,9 +55,7 @@ $Files = Storage::disk('ftp')->files($url);
 
 <div class="">
 
-
 	<ul class="list-group">
-
 
 	@if(count($ArchiveItem) <= 0)
 
@@ -70,8 +68,6 @@ $Files = Storage::disk('ftp')->files($url);
 				{{ explode("/",$dir)[count(explode("/",$dir)) - 1]  }}
 				</a>
 			</li>
-
-
 		@endforeach
 
 
@@ -92,11 +88,28 @@ $Files = Storage::disk('ftp')->files($url);
 				<a href='{{ dd(Storage::disk("ftp")->getDriver()) }}'>
 					{{  explode("/",$files)[count(explode("/",$files)) - 1] }}
 				</a> --}}
-				<span><i class="fa fa-download"></i>
+
+				{{-- 	
+				 <video width="320" height="240" controls>
+					
+
+					   <source src="{{$path}}" >
+					  
+					Your browser does not support the video tag.
+					</video> 
+ 					--}}
+
+				<span>
+					<i class="fa fa-download"></i>
 							<a href='ftp://172.16.0.22/cas1-shared/CASURECO I Archive/{{$files }}'>
 								{{  $filename }} 
 							</a>
 				</span>
+
+
+
+
+				@if(empty(trim(@$file_info->name)))
 				<span class="pull-right">
 				<i class="fa fa-link"></i>
 							<a class="text-muted" href='{{ route("archive.linkFile",["document"=>"ftp://172.16.0.22/cas1-shared/CASURECO I Archive/".$files,
@@ -104,7 +117,13 @@ $Files = Storage::disk('ftp')->files($url);
 								Link - tag
 							</a>
 				</span>
+				@endif
 
+				<br>
+
+				<span class="text-muted">#{{ $loop->iteration }}</span>
+					
+	
 			</li>
 		@endforeach
 
@@ -116,11 +135,12 @@ $Files = Storage::disk('ftp')->files($url);
 
 		<?php
 
+
+
 			$file = explode("/",$item->file_link)[count(explode("/",$item->file_link)) - 1];
 			$path = $item->file_link;
 			
 		
-
 		?>
 			<li class="list-group-item">
 				<p class="lead"><u>{{ @$item->name }}</u></p>
@@ -128,11 +148,16 @@ $Files = Storage::disk('ftp')->files($url);
 				{{-- 
 				<a href='{{ dd(Storage::disk("ftp")->getDriver()) }}'>
 					{{  explode("/",$files)[count(explode("/",$files)) - 1] }}
+
 				</a> --}}
+
+
+
+
 				<i class="fa fa-download"></i>
-							<a href='{{ $item->file_link  }}'>
-								{{  $file }} 
-							</a>
+					<a href='{{ $item->file_link  }}'>
+						{{  $file }} 
+					</a>
 			</li>
 		@endforeach
 

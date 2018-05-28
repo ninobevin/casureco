@@ -7,9 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 class Employee extends Model
 {
     //
+
     protected $connection = 'coopca_hrd';
     protected $primaryKey = 'cfcodeno';
-    protected $table = 'view_employee1';
+    protected $table = 'employee1';
+    public $timestamps = false;
+
 
     
 

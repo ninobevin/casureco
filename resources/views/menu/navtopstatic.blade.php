@@ -1,4 +1,9 @@
 
+<?php
+
+ 
+
+?>
  <nav class="navbar navbar-static-top">
       <!-- Sidebar toggle button-->
       <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
@@ -16,7 +21,7 @@
             <li class="dropdown messages-menu">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <i class="fa fa-envelope-o"></i>
-                <span class="label label-success">4</span>
+                <span class="label label-warning"></span>
               </a>
               <ul class="dropdown-menu">
                 <li class="header">You have 4 messages</li>
@@ -26,7 +31,7 @@
                     <li><!-- start message -->
                       <a href="#">
                         <div class="pull-left">
-                          <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                          <img src="{{asset('dist/img/user2-160x160.jpg')}}" class="img-circle" alt="User Image">
                         </div>
                         <h4>
                           Support Team
@@ -39,7 +44,7 @@
                     <li>
                       <a href="#">
                         <div class="pull-left">
-                          <img src="../../dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">
+                          <img src="{{asset('dist/img/user3-128x128.jpg')}}" class="img-circle" alt="User Image">
                         </div>
                         <h4>
                           AdminLTE Design Team
@@ -51,7 +56,7 @@
                     <li>
                       <a href="#">
                         <div class="pull-left">
-                          <img src="../../dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">
+                          <img src="{{asset('dist/img/user4-128x128.jpg')}}" class="img-circle" alt="User Image">
                         </div>
                         <h4>
                           Developers
@@ -63,7 +68,7 @@
                     <li>
                       <a href="#">
                         <div class="pull-left">
-                          <img src="../../dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">
+                          <img src="{{asset('dist/img/user3-128x128.jpg')}}" class="img-circle" alt="User Image">
                         </div>
                         <h4>
                           Sales Department
@@ -75,7 +80,7 @@
                     <li>
                       <a href="#">
                         <div class="pull-left">
-                          <img src="../../dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">
+                          <img src="{{asset('dist/img/user4-128x128.jpg')}}" class="img-circle" alt="User Image">
                         </div>
                         <h4>
                           Reviewers
@@ -93,7 +98,7 @@
             <li class="dropdown notifications-menu">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <i class="fa fa-bell-o"></i>
-                <span class="label label-warning">10</span>
+                <span class="label label-warning"></span>
               </a>
               <ul class="dropdown-menu">
                 <li class="header">You have 10 notifications</li>
@@ -135,7 +140,7 @@
             <li class="dropdown tasks-menu">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <i class="fa fa-flag-o"></i>
-                <span class="label label-danger">9</span>
+                <span class="label label-warning"></span>
               </a>
               <ul class="dropdown-menu">
                 <li class="header">You have 9 tasks</li>
@@ -208,13 +213,13 @@
             <!-- User Account: style can be found in dropdown.less -->
             <li class="dropdown user user-menu">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <img src="{{  asset('dist/img/user.jpeg') }}" class="user-image" alt="User Image">
+                <img src='{{ URL("user/".Auth::user()->employee_no."/avatar") }}' class="user-image" alt="User Image">
                Hi! <span class="hidden-xs">{{ ucwords(@Auth::user()->name) }}</span>
               </a>
               <ul class="dropdown-menu">
                 <!-- User image -->
                 <li class="user-header">
-                  <img src="{{ asset('dist/img/user.jpeg') }}" class="img-circle" alt="User Image">
+                  <img src='{{ URL("user/".Auth::user()->employee_no."/avatar") }}' class="img-circle" alt="User Image">
 
                   <p>
                     {{ ucwords(@Auth::user()->name) }}
@@ -239,7 +244,7 @@
                 <!-- Menu Footer-->
                 <li class="user-footer">
                   <div class="pull-left">
-                    <a href="#" class="btn btn-default btn-flat">Profile</a>
+                    <a href="#" class="btn btn-default btn-flat">My Profile</a>
                   </div>
                   <div class="pull-right">
                     <form action="{{ route('logout') }}" method="post">

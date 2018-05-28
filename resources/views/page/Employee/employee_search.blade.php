@@ -46,12 +46,39 @@ updated_at	datetime --}}
 
 <form action="" method="get">
 	<div class="input-group">
-	  <input type="text" autocomplete="off"   name='search' data-provide="typeahead" id='search' class="form-control" value="{{ @$_REQUEST['search'] }}" placeholder="Search...">
+	  <input type="text" autocomplete="off"   name='search'  data-provide="typeahead" id='search' class="form-control" value="{{ @$_REQUEST['search'] }}" placeholder="Search...">
 	  <span class="input-group-btn">
 	    <button type="submit"   class="btn btn-flat"><i class="fa fa-search"></i>
 	    </button>
 	  </span>
 	</div>
+
+
+<br>
+
+  <b class="text-muted"> Filter : </b> <br>
+  <div class="form-group">
+
+      <select name="status">
+        <option value="all">All</option>
+        <option value="active">Active</option>
+        <option value="inactive">Inactive</option>
+        <option value="terminated">Terminated</option>
+      </select>
+
+
+      <select name="group">
+          <option value="all">All</option>
+             @foreach( App\Model\coopca_hrd\Employee::select('cfgroup2')->groupBy('cfgroup2')->get() as $grp )
+                  <option value="{{ $grp->cfgroup2 }}"> {{ $grp->cfgroup2 }} </option>
+             @endforeach
+      </select>
+
+      <button type="submit"><i class="fa fa-search"></i> Search</button>
+    
+  </div>  
+
+
 
 </form>
 	
@@ -70,7 +97,7 @@ updated_at	datetime --}}
 
 @if( count($employee) > 0)
 
-<div class="col-md-12">
+<div class="col-sm-12">
           <div class="box box-solid">
             <div class="box-header with-border">
               <i class="fa fa-list"></i>
@@ -81,11 +108,48 @@ updated_at	datetime --}}
             <div class="box-body">
               <ul class="list-unstyled">
                	@foreach($employee as $emp)
-               	<a href="{{ route('employee.profile',['id'=>$emp->cfcodeno]) }}">
-               		<li>{{ $emp->cffname }} {{ $emp->cfmname }} {{ $emp->cflname }}  
-               		 	<span class="badge bg-{{ $emp->getDepartment['color'] }}"> {{ $emp->cfgroup2 }}</span>
+               
+               		<li style="height: 50%">
+
+                    <div class="row">
+
+                      <div class="col-sm-2">
+                        <img width="50%" src='{{ URL("user/".$emp->cfcodeno."/avatar") }}' class="img" alt="User Image">
+                      </div>    
+                        
+                        <div class="col-sm-4">
+                         
+                            <b>{{ $emp->cffname }} {{ $emp->cfmname }} {{ $emp->cflname }}</b>
+                            <br>
+                            <small class="text-muted">hired {{  Carbon\Carbon::parse($emp->dfhired)->diffForHumans() }}</small>
+                            <br>
+                              @switch( strtoupper($emp->cfstatus[0]))
+
+                                @case("A")
+                                  <span class="text-success"><b>Active</b></span>
+                                @break
+
+                                @case("I")
+                                  <span class="text-default"><b>Inactive</b></span>
+                                @break
+
+                                @case("T")
+                                  <span class="text-danger"><b>Terminated</b></span>
+                                @break
+                              @endswitch
+                            <br>
+                            <span class="badge bg-{{ $emp->getDepartment['color'] }}"> {{ $emp->cfgroup2 }}</span>                                                       
+                        </div>
+                        <div class="col-sm-6">
+
+                             <a href="{{ route('employee.profile',['id'=>$emp->cfcodeno]) }}">
+                                <i class="fa fa-user"></i>View Profile  
+                              </a>  
+                        </div>
+                    </div>
+                    <hr>
                		</li> 
-                </a>  
+               
                	@endforeach
               </ul>
             </div>
@@ -102,14 +166,14 @@ updated_at	datetime --}}
 </div>
 	
 	@if(isset($_REQUEST['search']))
-	{{ $employee->appends(['search'=>$_REQUEST['search']])->links() }}
+	{{ $employee->appends(['search'=>$_REQUEST['search'],'status'=>$_REQUEST['status'],'group'=>$_REQUEST['group']])->links() }}
+
+  @else
+
+    {{ $employee->links() }}
+
 	@endif
 	
-
-
-
-
-
 
 @endsection
 
