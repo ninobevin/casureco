@@ -50,6 +50,29 @@ use \Illuminate\Support\Facades\Cookie;
             </li>
             <li class="treeview">
               <a href="#">
+                <i class="fa fa-handshake-o"></i> <span>Customer</span>
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+              </a>
+              <ul class="treeview-menu">
+                <li class="treeview">
+                  <a href="#">
+                    <span>Help Desk</span>
+                    <span class="pull-right-container">
+                      <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                  </a>
+                  <ul class="treeview-menu">
+                    <li><a href='{{ route("customer.ticket.open_ticket") }}'>Open Ticket</a></li>
+                    <li><a href='#'>Manage Ticket</a></li>
+                  </ul>
+                </li>
+                <li><a href='#'>Bills and Payments</a></li>
+              </ul>
+            </li>
+            <li class="treeview">
+              <a href="#">
                 <i class="fa fa-archive"></i> <span>Archive </span>
                 <span class="pull-right-container">
                   <i class="fa fa-angle-left pull-right"></i>
@@ -60,6 +83,7 @@ use \Illuminate\Support\Facades\Cookie;
                 <li><a href='{{ route('archive.linkFile') }}'>Manage Link</a></li>
               </ul>
             </li>
+            
             <li class="header">LABELS</li>
             <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
             <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>

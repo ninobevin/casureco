@@ -63,6 +63,20 @@ Route::prefix('employee')->group(function () {
 
 });
 
+
+///ticketing area
+
+Route::prefix('customer-service')->group(function () {
+ 
+   Route::get('open-ticket','Customer\\TicketController@open_ticket')->name('customer.ticket.open_ticket');
+   
+
+});
+
+
+
+///
+
 Route::get('user/{id}/avatar', function ($id) {
 
     // Find the user
